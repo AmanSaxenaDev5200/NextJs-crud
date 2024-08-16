@@ -35,7 +35,7 @@ async function deleteInterpretation(id:string) {
 }
 
 // Updata
-export async function updateInterpretation(id:string,data: {term: string, interpretation: string}) {
+async function updateInterpretation(id:string,data: {term: string, interpretation: string}) {
     try {
         const response = await database.updateDocument(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
@@ -54,8 +54,8 @@ export async function updateInterpretation(id:string,data: {term: string, interp
 export async function GET(req: Request, { params } : {params : {id: string}}){
     try {
         const id = params.id;
-        const interpretaion = await fetchInterpretation(id);
-        return NextResponse.json({interpretaion});
+        const interpretation = await fetchInterpretation(id);
+        return NextResponse.json({interpretation});
     } catch (error) {
         return NextResponse.json(
             {error: "failed"},
@@ -86,8 +86,8 @@ export async function DELETE(req: Request, { params } : {params : {id: string}})
 export async function PUT(req: Request, { params } : {params : {id: string}}){
     try {
         const id = params.id;
-        const interpretaion = await req.json();
-        await updateInterpretation(id,interpretaion);
+        const interpretation = await req.json();
+        await updateInterpretation(id,interpretation);
         return NextResponse.json({message: "Interpretation updated"});
     } catch (error) {
         return NextResponse.json(
